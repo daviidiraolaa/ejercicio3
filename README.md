@@ -43,14 +43,17 @@ it("obtener y listar las mascotas", () => {
 });
 ```
 
-##Estructura de Directorios
+## Estructura de Directorios
 
-cypress: Contiene las pruebas Cypress.
-integration: Contiene los archivos de pruebas.
-support: Contiene archivos de soporte, incluido commands.js con comandos personalizados.
-e2e: Contiene la clase PetsHelper para el tercer ejercicio.
+·cypress: Contiene las pruebas Cypress.
 
-##Comandos Personalizados
+·integration: Contiene los archivos de pruebas.
+
+·support: Contiene archivos de soporte, incluido commands.js con comandos personalizados.
+
+·e2e: Contiene la clase PetsHelper para el tercer ejercicio.
+
+## Comandos Personalizados
 
 ```
 Cypress.Commands.add("setUsers", () => { ... });
@@ -58,6 +61,6 @@ Cypress.Commands.add("getUserInfo", (userName) => { ... });
 Cypress.Commands.add("getPets", (status) => { ... });
 ```
 
-##Requisitos
+## Requisitos
 
 Node.js y npm deben estar instalados en tu sistema.
