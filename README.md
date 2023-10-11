@@ -1,4 +1,4 @@
-# Proyecto de Pruebas Automatizadas con Cypress
+# Proyecto de Pruebas APIs Automatizadas con Cypress
 
 Este proyecto contiene pruebas automatizadas utilizando Cypress para una tienda de mascotas.
 
