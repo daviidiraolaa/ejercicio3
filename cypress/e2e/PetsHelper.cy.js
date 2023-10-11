@@ -1,88 +1,75 @@
-var petsData = []
-var soldPets = []
-var pending = []
-var available = []
-
 class PetsHelper {
   constructor(petsList) {
-    this.petsData = petsList;
+    this.petsData = petsList; // Asigna la lista de mascotas proporcionada
   }
 
-   getAllPets() {
-    this.clearPets();
+  getAllPets() {
+    this.clearPets(); // Limpia la lista de mascotas
 
-   var mascota = []
-   var allValues = '';
-    
-   cy.getPets("sold").then(response =>  { 
-    const { body } = response
-    expect(response.status).to.eq(200)
+    var mascota = [];
 
+    // Obtiene las mascotas vendidas
+    cy.getPets("sold").then((response) => {
+      const { body } = response;
+      expect(response.status).to.eq(200);
 
-    for (var i = 0; i < response.body.length; i++) {
-      var obj = response.body[i];
-      // Concatenate the values from each JSON object
-      allValues += JSON.stringify(obj);
-    }
-
-    cy.getPets("pending").then(response1 => { 
-      const { body } = response1
-      expect(response1.status).to.eq(200)
-
-      for (var i = 0; i < response1.body.length; i++) {
-        var obj = response1.body[i];
-        // Concatenate the values from each JSON object
-        allValues += JSON.stringify(obj);
+      // Añade las mascotas vendidas a la lista
+      for (var i = 0; i < response.body.length; i++) {
+        var obj = response.body[i];
+        mascota.push(obj);
       }
 
-  //  mascota.push(body)
+      // Obtiene las mascotas pendientes
+      cy.getPets("pending").then((response1) => {
+        const { body } = response1;
+        expect(response1.status).to.eq(200);
 
+        // Añade las mascotas pendientes a la lista
+        for (var i = 0; i < response1.body.length; i++) {
+          var obj = response1.body[i];
+          mascota.push(obj);
+        }
 
-    cy.getPets("available").then(response2 => { 
-      const { body } = response2
-      expect(response2.status).to.eq(200)
-      for (var i = 0; i < response2.body.length; i++) {
-        var obj = response2.body[i];
-        // Concatenate the values from each JSON object
-        allValues += JSON.stringify(obj);
-      }
+        // Obtiene las mascotas disponibles
+        cy.getPets("available").then((response2) => {
+          const { body } = response2;
+          expect(response2.status).to.eq(200);
 
-     // mascota.push(body)
-     mascota = [allValues]
-     console.log(mascota)
-      return mascota;
+          // Añade las mascotas disponibles a la lista
+          for (var i = 0; i < response2.body.length; i++) {
+            var obj = response2.body[i];
+            mascota.push(obj);
+          }
 
-    })
-    })
+          const contadorNombres = {};
 
-   })
-    
+          // Recorre el arreglo y cuenta las mascotas por nombre
+          mascota.forEach((masc) => {
+            const nombre = masc.name;
+            if (contadorNombres[nombre]) {
+              contadorNombres[nombre]++;
+            } else {
+              contadorNombres[nombre] = 1;
+            }
+          });
 
-   return mascota;
-
-
-
-  }
-
-  /* getPetsByStatus(status) {
-    var petsByStatus = []
-    cy.getPets(status).then((response) => {
-      for (const pet of response.body) {
-      const mascota = { id: pet.id, nombre: pet.name };
-      petsByStatus.push(mascota);
-    }
+          // Imprime los resultados
+          for (const nombre in contadorNombres) {
+            var formatted = nombre.trim() != "" ? nombre : "**SIN NOMBRE**";
+            if (contadorNombres[nombre] > 1){
+              console.log(`${formatted}: ${contadorNombres[nombre]}`);
+              cy.log(`${formatted}: ${contadorNombres[nombre]}`)
+            }
+          }
+        });
+      });
     });
-    console.log("fin consulta ")
-    return petsByStatus;
-  }*/
 
-  setPets(petsList) {
-    this.petsData = petsList;
+    return [];
   }
 
   clearPets() {
-    console.log("CLEAR")
-    this.petsData = Array();
+    this.petsData = Array(); // Limpia la lista de mascotas
   }
 }
 

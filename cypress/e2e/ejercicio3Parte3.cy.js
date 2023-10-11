@@ -1,44 +1,14 @@
-import PetsHelper from '../e2e/PetsHelper.cy';
+// Importa la clase PetsHelper desde el archivo "PetsHelper.cy.js"
+import PetsHelper from "../e2e/PetsHelper.cy";
 
-var petsList = []
+// Crea un array vacío para almacenar las mascotas
+var petsList = [];
 
-it('obtener y listar las mascotas',   () => {
-   var petsHelper = new PetsHelper(petsList);
-   var pets =  petsHelper.getAllPets();
-   listPets(pets)
+// Define un caso de prueba para obtener y listar las mascotas
+it("Obtener y listar las mascotas", () => {
+  // Crea una instancia de PetsHelper pasando la lista de mascotas
+  var petsHelper = new PetsHelper(petsList);
+
+  // Llama al método para obtener todas las mascotas
+  petsHelper.getAllPets();
 });
-
-async function listPets(pets) {
-
-  console.log(pets)
-  console.log('Esperando a que la lista esté llena...');
-  const filledList = await waitForListToBeFilled(pets, 3);
-  console.log('La lista está llena:', filledList);
-
-  filledList.forEach(function(item, index) {
-    item.forEach(function(itemAux, indexAux) {
-      console.log(itemAux.id)
-    });
-  });
-  
-
-
-
-}
-
-
-function waitForListToBeFilled(list, targetLength) {
-  return new Promise(resolve => {
-    if (list.length >= targetLength) {
-      resolve(list);
-    } else {
-      const checkList = () => {
-        if (list.length >= targetLength) {
-          clearInterval(interval);
-          resolve(list);
-        }
-      };
-      const interval = setInterval(checkList, 100); // Comprueba cada 100 milisegundos
-    }
-  });
-}
