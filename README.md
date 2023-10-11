@@ -29,7 +29,8 @@ function getPets(petsData) {
 
 function listPets(petsList) {
   // ...
-}```
+}
+```
 
 ## Ejercicio 3: Tratamiento de Datos en APIs
 En este ejercicio, se crea una clase PetsHelper para procesar y contar las mascotas con el mismo nombre.
@@ -39,7 +40,8 @@ En este ejercicio, se crea una clase PetsHelper para procesar y contar las masco
 it("obtener y listar las mascotas", () => {
   var petsHelper = new PetsHelper(petsList);
   petsHelper.getAllPets();
-});```
+});
+```
 
 ##Estructura de Directorios
 
@@ -50,7 +52,6 @@ e2e: Contiene la clase PetsHelper para el tercer ejercicio.
 
 ##Comandos Personalizados
 
-Código:
 ```
 Cypress.Commands.add("setUsers", () => { ... });
 Cypress.Commands.add("getUserInfo", (userName) => { ... });
